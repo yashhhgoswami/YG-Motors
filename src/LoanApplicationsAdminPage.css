@@ -1,0 +1,252 @@
+/* src/LoanApplicationsAdminPage.css */
+
+.admin-page-container {
+  background-color: #000;
+  color: #fff;
+  padding: 120px 40px 60px 40px;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.admin-page-title {
+  text-align: center;
+  font-size: 3rem;
+  color: #e0a800;
+  margin-bottom: 10px;
+}
+
+.admin-page-subtitle {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #ccc;
+  max-width: 600px;
+  margin: 0 auto 50px auto;
+}
+
+.admin-table-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #111;
+  padding: 30px;
+  border-radius: 8px;
+  border: 1px solid #222;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 15px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.admin-table thead {
+  border-bottom: 2px solid #e0a800;
+}
+
+.admin-table th {
+  color: #e0a800;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+}
+
+.admin-table tbody tr {
+  border-bottom: 1px solid #333;
+  transition: background-color 0.3s ease;
+}
+
+.admin-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.admin-table tbody tr:hover {
+  background-color: #222;
+}
+
+.admin-table td {
+  color: #ccc;
+}
+
+.no-data-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #888;
+  padding: 40px;
+}
+
+.details-button-admin {
+  background-color: #333;
+  color: #e0a800;
+  border: 1px solid #555;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.details-button-admin:hover {
+  background-color: #e0a800;
+  color: #000;
+  border-color: #e0a800;
+}
+
+/* --- STYLES for Status Badges and Action Buttons --- */
+.status-badge {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.status-pending {
+  background-color: #555;
+  color: #fff;
+}
+
+.status-accepted {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.status-rejected {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.action-button {
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  border: 1px solid;
+}
+
+.action-button.accept {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: #fff;
+}
+.action-button.accept:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.action-button.reject {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: #fff;
+}
+.action-button.reject:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+
+/* Modal Styles */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background-color: #111;
+  width: 90%;
+  max-width: 800px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  animation: slideIn 0.4s ease-out;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  border-bottom: 1px solid #e0a800;
+}
+
+.modal-header h2 {
+  color: #e0a800;
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 2.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-button:hover {
+  color: #fff;
+}
+
+.modal-body {
+  padding: 30px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.detail-section {
+  margin-bottom: 25px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #333;
+}
+.detail-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.detail-section h3 {
+  color: #e0a800;
+  font-size: 1.3rem;
+  margin: 0 0 15px 0;
+}
+
+.detail-section p {
+  color: #ccc;
+  margin: 0 0 10px 0;
+  font-size: 1rem;
+}
+
+.detail-section p strong {
+  color: #888;
+  margin-right: 10px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

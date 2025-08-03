@@ -1,0 +1,75 @@
+/* src/ApplicationStatusPage.css */
+
+.status-page-container {
+  background-color: #000;
+  color: #fff;
+  padding: 120px 40px 60px 40px;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.status-page-title {
+  text-align: center;
+  font-size: 3rem;
+  color: #e0a800;
+  margin-bottom: 50px;
+}
+
+.status-list-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  gap: 25px;
+}
+
+.status-card {
+  background-color: #111;
+  border: 1px solid #222;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.status-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1a1a1a;
+  padding: 20px;
+}
+
+.status-card-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #e0a800;
+}
+
+.status-card-body {
+  padding: 25px;
+}
+
+.status-card-body p {
+  color: #ccc;
+  font-size: 1rem;
+  margin: 0 0 10px 0;
+}
+
+.status-card-body p:last-child {
+  margin-bottom: 0;
+}
+
+.status-card-body strong {
+  color: #888;
+}
+
+/* Re-using status badge styles */
+.status-badge {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.status-pending { background-color: #555; color: #fff; }
+.status-accepted { background-color: #28a745; color: #fff; }
+.status-rejected { background-color: #dc3545; color: #fff; }
+.no-data-message { text-align: center; font-size: 1.2rem; color: #888; padding: 40px; }

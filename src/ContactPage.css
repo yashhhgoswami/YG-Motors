@@ -1,0 +1,125 @@
+/* src/ContactPage.css */
+
+.contact-page-container {
+  background-color: #000;
+  color: #fff;
+  padding: 120px 40px 60px 40px;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.contact-page-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.contact-page-header h1 {
+  font-size: 3.5em;
+  color: #e0a800;
+  margin-bottom: 10px;
+}
+
+.contact-page-header p {
+  font-size: 1.2em;
+  color: #ccc;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-page-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #111;
+  padding: 40px;
+  border-radius: 8px;
+}
+
+.contact-details-wrapper h2,
+.contact-form-wrapper h2 {
+  color: #e0a800;
+  font-size: 2em;
+  margin-top: 0;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #333;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 25px;
+}
+
+.info-icon {
+  font-size: 1.5em;
+  margin-right: 20px;
+  color: #e0a800;
+}
+
+.info-item div strong {
+  display: block;
+  font-size: 1.1em;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+.info-item div p,
+.info-item div a {
+  margin: 0;
+  color: #ccc;
+  text-decoration: none;
+  line-height: 1.6;
+}
+
+.info-item div a:hover {
+  color: #e0a800;
+}
+
+.contact-form-wrapper form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-form-wrapper input,
+.contact-form-wrapper textarea {
+  background-color: #222;
+  border: 1px solid #444;
+  color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 1em;
+  font-family: inherit;
+}
+
+.contact-form-wrapper input:focus,
+.contact-form-wrapper textarea:focus {
+  outline: none;
+  border-color: #e0a800;
+}
+
+.submit-button {
+  background-color: #e0a800;
+  color: #000;
+  border: none;
+  padding: 15px;
+  font-size: 1.1em;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #fff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .contact-page-content {
+    grid-template-columns: 1fr;
+  }
+}

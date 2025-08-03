@@ -1,0 +1,95 @@
+/* src/LoanApplicationPage.css (UPDATED) */
+
+.loan-page-container {
+  background-color: #000;
+  color: #fff;
+  padding: 120px 40px 60px 40px;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.loan-page-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.loan-page-header h1 {
+  font-size: 3.5em;
+  color: #e0a800;
+  margin-bottom: 10px;
+}
+
+.loan-page-header p {
+  font-size: 1.2em;
+  color: #ccc;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.loan-form-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  background-color: #111;
+  padding: 40px 50px;
+  border-radius: 8px;
+}
+
+.form-section-title {
+  font-size: 1.8em;
+  color: #e0a800;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #333;
+}
+.form-step > .form-section-title:first-of-type {
+  margin-top: 0;
+}
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px 40px; }
+.form-group { display: flex; flex-direction: column; }
+.form-group.full-width { grid-column: 1 / -1; }
+.form-group label { margin-bottom: 8px; font-size: 1em; color: #ccc; }
+.form-group input, .form-group select { background-color: #222; border: 1px solid #444; color: #fff; padding: 12px 15px; border-radius: 5px; font-size: 1em; font-family: inherit; }
+.form-group input:focus, .form-group select:focus { outline: none; border-color: #e0a800; }
+.required { color: #e0a800; margin-left: 2px;}
+
+/* --- NEW STYLES for radio buttons --- */
+.radio-group {
+    display: flex;
+    gap: 25px;
+    background-color: #222;
+    border: 1px solid #444;
+    padding: 12px 15px;
+    border-radius: 5px;
+}
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0;
+    cursor: pointer;
+}
+.radio-group input[type="radio"] {
+    accent-color: #e0a800;
+}
+
+
+/* Re-using styles from OrderPage.css */
+.progress-bar-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; }
+.step-item { display: flex; align-items: center; color: #666; transition: color 0.3s ease; }
+.step-item.active { color: #e0a800; }
+.step-number { width: 40px; height: 40px; border-radius: 50%; border: 2px solid #666; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2em; transition: border-color 0.3s ease, background-color 0.3s ease; }
+.step-item.active .step-number { border-color: #e0a800; background-color: #e0a800; color: #000; }
+.step-label { margin-left: 15px; font-size: 1.1em; font-weight: bold; }
+.step-connector { flex-grow: 1; height: 2px; background-color: #333; margin: 0 20px; }
+.form-step { animation: fadeIn 0.5s ease-in-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.step-navigation { display: flex; width: 100%; margin-top: 50px; border-top: 1px solid #333; padding-top: 30px; }
+.next-button, .back-button, .submit-button { border: none; padding: 12px 35px; font-size: 1.1em; font-weight: bold; border-radius: 5px; cursor: pointer; transition: all 0.3s ease; }
+.step-navigation .next-button, .step-navigation .submit-button { margin-left: auto; }
+.back-button { background-color: transparent; color: #aaa; border: 1px solid #444; }
+.back-button:hover { background-color: #222; color: #fff; }
+.next-button, .submit-button { background-color: #e0a800; color: #000; }
+.next-button:hover, .submit-button:hover { background-color: #fff; }
+.next-button:disabled, .submit-button:disabled { background-color: #444; color: #888; cursor: not-allowed; }

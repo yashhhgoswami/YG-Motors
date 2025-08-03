@@ -1,0 +1,267 @@
+/* src/OrderPage.css */
+
+.order-page-container {
+  background-color: #000;
+  color: #fff;
+  padding: 120px 40px 60px 40px;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.order-page-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.order-page-header h1 {
+  font-size: 3.5em;
+  color: #e0a800;
+  margin-bottom: 10px;
+}
+
+.order-page-header p {
+  font-size: 1.2em;
+  color: #ccc;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.order-form-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  background-color: #111;
+  padding: 40px 50px;
+  border-radius: 8px;
+}
+
+/* Progress Bar */
+.progress-bar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+}
+.step-item {
+  display: flex;
+  align-items: center;
+  color: #666;
+  transition: color 0.3s ease;
+}
+.step-item.active {
+  color: #e0a800;
+}
+.step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2em;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+.step-item.active .step-number {
+  border-color: #e0a800;
+  background-color: #e0a800;
+  color: #000;
+}
+.step-label {
+  margin-left: 15px;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+.step-connector {
+  flex-grow: 1;
+  height: 2px;
+  background-color: #333;
+  margin: 0 20px;
+}
+
+/* Form Steps */
+.form-step {
+  animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.step-title {
+  font-size: 2em;
+  color: #e0a800;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* Vehicle Selection */
+.vehicle-selection-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+.vehicle-card {
+  background-color: #222;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+.vehicle-card:hover {
+  transform: translateY(-5px);
+  border-color: #555;
+}
+.vehicle-card.selected {
+  border-color: #e0a800;
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(224, 168, 0, 0.3);
+}
+.vehicle-card-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+.vehicle-card-body {
+  padding: 15px;
+}
+.vehicle-card-body h4 {
+  margin: 0 0 5px 0;
+  font-size: 1.2em;
+  color: #fff;
+}
+.vehicle-card-body p {
+  margin: 0;
+  color: #aaa;
+}
+
+/* Details Form */
+.details-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px 40px;
+}
+/* This is a shared class from TradeInPage.css, so we include it here too */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+.form-group label {
+  margin-bottom: 8px;
+  font-size: 1em;
+  color: #ccc;
+}
+.form-group input,
+.form-group select {
+  background-color: #222;
+  border: 1px solid #444;
+  color: #fff;
+  padding: 12px 15px;
+  border-radius: 5px;
+  font-size: 1em;
+  font-family: inherit;
+}
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #e0a800;
+}
+
+
+/* Review Summary */
+.review-summary {
+  background-color: #222;
+  padding: 30px;
+  border-radius: 8px;
+  border-left: 4px solid #e0a800;
+}
+.review-section {
+  margin-bottom: 25px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #333;
+}
+.review-section:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.review-section h4 {
+  color: #e0a800;
+  font-size: 1.3em;
+  margin: 0 0 10px 0;
+}
+.review-section p {
+  margin: 5px 0;
+  font-size: 1.1em;
+  color: #ccc;
+}
+
+.final-notice {
+  text-align: center;
+  color: #aaa;
+  margin-top: 30px;
+  font-style: italic;
+}
+
+
+/* --- STEP NAVIGATION STYLING UPDATED --- */
+.step-navigation {
+  display: flex;
+  width: 100%;
+  margin-top: 50px;
+  border-top: 1px solid #333;
+  padding-top: 30px;
+}
+
+.next-button, .back-button, .submit-button {
+  border: none;
+  /* --- PADDING AND FONT-SIZE RE-ADJUSTED --- */
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.step-navigation .next-button,
+.step-navigation .submit-button {
+  margin-left: auto; 
+}
+
+
+.back-button {
+  background-color: transparent;
+  color: #aaa;
+  border: 1px solid #444;
+}
+.back-button:hover {
+  background-color: #222;
+  color: #fff;
+}
+
+.next-button {
+  background-color: #e0a800;
+  color: #000;
+}
+.next-button:hover {
+  background-color: #fff;
+}
+.next-button:disabled {
+  background-color: #444;
+  color: #888;
+  cursor: not-allowed;
+}
+
+.submit-button {
+  background-color: #e0a800;
+  color: #000;
+}
+
+.submit-button:hover {
+  background-color: #fff;
+}
