@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from './firebaseConfig';
 
-// CSS Imports
+// ... (All CSS and Component imports remain the same)
 import './App.css';
 import './Modal.css';
 import './ContactPage.css';
@@ -22,9 +22,8 @@ import './LoanApplicationsAdminPage.css';
 import './TestDrivePage.css';
 import './ApplicationStatusPage.css';
 import './CreateProfilePage.css';
+import './InventoryLandingPage.css';
 import './VehicleDetailsModal.css';
-
-// Component Imports
 import Modal from './Modal';
 import ContactPage from './ContactPage';
 import AboutPage from './AboutPage';
@@ -42,9 +41,12 @@ import TradeInAdminPage from './TradeInAdminPage';
 import TestDrivePage from './TestDrivePage';
 import ApplicationStatusPage from './ApplicationStatusPage';
 import CreateProfilePage from './CreateProfilePage';
+import InventoryLandingPage from './InventoryLandingPage';
+
 
 // Asset Imports
 import logo from './assets/Vector.png';
+import urusVideo from './assets/luruus.mp4';
 import luxurySedanImg from './assets/inventory-cars/luxury-sedan.jpeg';
 import sportCoupeImg from './assets/inventory-cars/sports-coupe.jpeg';
 import electricSuvImg from './assets/inventory-cars/electric-suv.jpeg';
@@ -91,39 +93,30 @@ function Navbar({ isScrolled, user, isAdmin }) {
 }
 
 function HeroSection() {
-  const [showScrollCars, setShowScrollCars] = useState(false);
   const [isTextVisible, setIsTextVisible] = useState(true);
-  const cars = [
-    { id: 'luxury-sedan', name: 'Luxury Sedan', details: 'Elegant design, powerful engine.', imageUrl: luxurySedanImg },
-    { id: 'sport-coupe', name: 'Sport Coupe', details: 'Dynamic performance, sleek profile.', imageUrl: sportCoupeImg },
-    { id: 'electric-suv', name: 'Electric SUV', details: 'Eco-friendly, spacious interior.', imageUrl: electricSuvImg },
-    { id: 'classic-roadster', name: 'Classic Roadster', details: 'Timeless beauty, open-top driving.', imageUrl: classicRoadsterImg },
-    { id: 'family-crossover', name: 'Family Crossover', details: 'Spacious and versatile.', imageUrl: familyCrossoverImg },
-    { id: 'compact-hatchback', name: 'Compact Hatchback', details: 'Economical and agile.', imageUrl: compactHatchbackImg },
-  ];
+
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > window.innerHeight * 0.5 && !showScrollCars) {
-        setShowScrollCars(true);
-      }
       setIsTextVisible(window.scrollY < 100);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [showScrollCars]);
+  }, []);
+
   const handleDiscoverClick = () => {
     const inventorySection = document.getElementById('inventory-section');
     if (inventorySection) {
       inventorySection.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
   return (
     <section className="hero-section">
       <video
-  className="main-car-video"
-  src="https://res.cloudinary.com/dpnndqqm4/video/upload/v1754243153/luruus_kjgpcs.mp4" // Paste your Cloudinary URL here
-  autoPlay loop muted playsInline
-/>
+        className="main-car-video"
+        src={urusVideo}
+        autoPlay loop muted playsInline
+      />
       <div className="video-overlay"></div>
       <div className={`hero-text-container ${!isTextVisible ? 'hero-text--hidden' : ''}`}>
         <h1 className="hero-title-unleash">UNLEASH</h1>
@@ -133,23 +126,57 @@ function HeroSection() {
           Discover Now
         </button>
       </div>
-      <div id="inventory-section" className={`scrollable-content ${showScrollCars ? 'show' : ''}`}>
-        <h2 className="inventory-heading">Our Current Inventory</h2>
-        <div className="scrollable-cars-container">
-          {cars.map(car => (
-            <Link to="/inventory" key={car.id} className="car-card-link">
-              <div className="car-card">
-                <img src={car.imageUrl} alt={car.name} className="car-image" />
-                <div className="car-details-box">
-                  <h3>{car.name}</h3>
-                  <p>{car.details}</p>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
     </section>
+  );
+}
+
+// --- HOME INVENTORY SECTION UPGRADED with scroll effect ---
+function HomeInventorySection() {
+  const [showInventory, setShowInventory] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Trigger when the top of the section is about to come into view
+      const section = document.getElementById('inventory-section');
+      if (section) {
+        const top = section.getBoundingClientRect().top;
+        if (top < window.innerHeight * 0.75) {
+          setShowInventory(true);
+        }
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    // Initial check in case the section is already in view on load
+    handleScroll(); 
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const cars = [
+    { id: 'luxury-sedan', name: 'Luxury Sedan', details: 'Elegant design, powerful engine.', imageUrl: luxurySedanImg },
+    { id: 'sport-coupe', name: 'Sport Coupe', details: 'Dynamic performance, sleek profile.', imageUrl: sportCoupeImg },
+    { id: 'electric-suv', name: 'Electric SUV', details: 'Eco-friendly, spacious interior.', imageUrl: electricSuvImg },
+    { id: 'classic-roadster', name: 'Classic Roadster', details: 'Timeless beauty, open-top driving.', imageUrl: classicRoadsterImg },
+    { id: 'family-crossover', name: 'Family Crossover', details: 'Spacious and versatile.', imageUrl: familyCrossoverImg },
+    { id: 'compact-hatchback', name: 'Compact Hatchback', details: 'Economical and agile.', imageUrl: compactHatchbackImg },
+  ];
+
+  return (
+    <div id="inventory-section" className={`home-inventory-section ${showInventory ? 'show' : ''}`}>
+      <h2 className="inventory-heading">Our Current Inventory</h2>
+      <div className="scrollable-cars-container">
+        {cars.map(car => (
+          <Link to="/inventory" key={car.id} className="car-card-link">
+            <div className="car-card">
+              <img src={car.imageUrl} alt={car.name} className="car-image" />
+              <div className="car-details-box">
+                <h3>{car.name}</h3>
+                <p>{car.details}</p>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -210,6 +237,7 @@ function HomePage() {
   return (
     <>
       <HeroSection />
+      <HomeInventorySection />
       <AboutUsSection />
       <ContactUsSection />
     </>
@@ -266,7 +294,8 @@ function App() {
             <Navbar isScrolled={isScrolled} user={user} isAdmin={isAdmin} />
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/inventory" element={<InventoryPage />} />
+              <Route path="/inventory" element={<InventoryLandingPage />} />
+              <Route path="/inventory/:category" element={<InventoryPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/trade-in" element={<TradeInPage showModal={showModal}/>} />

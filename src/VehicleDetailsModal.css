@@ -133,7 +133,7 @@
 }
 
 .modal-actions {
-  margin-top: auto; /* Pushes buttons to the bottom */
+  margin-top: auto;
   padding-top: 25px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -148,13 +148,15 @@
   cursor: pointer;
   border: none;
   transition: all 0.3s ease;
-  text-decoration: none; /* --- THIS LINE REMOVES THE UNDERLINE --- */
-  text-align: center; /* Ensures text is centered like a button */
+  text-decoration: none;
+  text-align: center;
 }
 
 .action-button.primary {
   background-color: #e0a800;
   color: #000;
+  grid-column: 1 / -1;
+  margin-bottom: 10px;
 }
 .action-button.primary:hover {
   background-color: #fff;
