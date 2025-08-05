@@ -1,62 +1,43 @@
 // src/InventoryPage.js
 
-import React, { useState, useMemo } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+// import { Link } from 'react-router-dom'; // This import is no longer needed and has been removed.
 import { modelData } from './carData';
 import './InventoryPage.css';
 import VehicleDetailsModal from './VehicleDetailsModal';
 
-const FilterSidebar = ({ vehicles, activeFilters, onFilterChange }) => {
-  const makes = [...new Set(vehicles.map(v => v.make))];
-  const priceRanges = [
-    { label: '$0 - $99,999', min: 0, max: 99999 },
-    { label: '$100,000 - $249,999', min: 100000, max: 249999 },
-    { label: '$250,000+', min: 250000, max: Infinity },
-  ];
+// --- FILTER SIDEBAR COMPONENT (RESTORED) ---
+const FilterSidebar = () => (
+  <aside className="filter-sidebar">
+    <div className="filter-group">
+      <h3 className="filter-title">Body Style</h3>
+      <ul className="filter-options">
+        <li><button type="button" className="filter-button">Convertible</button><span>1</span></li>
+        <li><button type="button" className="filter-button">Coupe</button><span>1</span></li>
+        <li><button type="button" className="filter-button">Sedan</button><span>1</span></li>
+        <li><button type="button" className="filter-button">SUV</button><span>1</span></li>
+      </ul>
+    </div>
+    <div className="filter-group">
+      <h3 className="filter-title">Make</h3>
+      <ul className="filter-options">
+        <li><button type="button" className="filter-button">Apex Motors</button><span>1</span></li>
+        <li><button type="button" className="filter-button">Galvanic</button><span>1</span></li>
+        <li><button type="button" className="filter-button">Stellari</button><span>1</span></li>
+        <li><button type="button" className="filter-button">Vintage Veloce</button><span>1</span></li>
+      </ul>
+    </div>
+    <div className="filter-group">
+      <h3 className="filter-title">Price</h3>
+      <ul className="filter-options">
+        <li><button type="button" className="filter-button">$50,000 - $149,999</button><span>2</span></li>
+        <li><button type="button" className="filter-button">$150,000+</button><span>2</span></li>
+      </ul>
+    </div>
+  </aside>
+);
 
-  return (
-    <aside className="filter-sidebar">
-      <div className="filter-group">
-        <h3 className="filter-title">Make</h3>
-        <ul className="filter-options">
-          {makes.map(make => (
-            <li key={make}>
-              <button 
-                type="button" 
-                className={`filter-button ${activeFilters.make === make ? 'active' : ''}`}
-                onClick={() => onFilterChange('make', make)}
-              >
-                {make}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="filter-group">
-        <h3 className="filter-title">Price</h3>
-        <ul className="filter-options">
-          {priceRanges.map(range => (
-            <li key={range.label}>
-              <button 
-                type="button" 
-                className={`filter-button ${activeFilters.price === range.label ? 'active' : ''}`}
-                onClick={() => onFilterChange('price', range.label)}
-              >
-                {range.label}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-      {(activeFilters.make || activeFilters.price) && (
-        <button className="clear-filters-button" onClick={() => onFilterChange('clear', null)}>
-          Clear All Filters
-        </button>
-      )}
-    </aside>
-  );
-};
-
+// Vehicle Listing Card Component
 const VehicleCard = ({ vehicle, onViewDetails }) => (
   <div className="vehicle-listing-card">
     <div className="card-image-section">
@@ -78,80 +59,31 @@ const VehicleCard = ({ vehicle, onViewDetails }) => (
   </div>
 );
 
+// Main Inventory Page Component
 function InventoryPage() {
-  const { category } = useParams();
   const [selectedVehicle, setSelectedVehicle] = useState(null);
-  const [activeFilters, setActiveFilters] = useState({
-    make: null,
-    price: null,
-  });
-
-  const handleFilterChange = (filterType, value) => {
-    if (filterType === 'clear') {
-      setActiveFilters({ make: null, price: null });
-      return;
-    }
-    setActiveFilters(prev => ({
-      ...prev,
-      [filterType]: prev[filterType] === value ? null : value,
-    }));
-  };
-
-  const filteredVehicles = useMemo(() => {
-    let vehicles = category 
-      ? modelData.filter(vehicle => vehicle.category.replace(/\s+/g, '-').toLowerCase() === category.toLowerCase())
-      : modelData;
-
-    if (activeFilters.make) {
-      vehicles = vehicles.filter(v => v.make === activeFilters.make);
-    }
-    if (activeFilters.price) {
-      const priceRanges = {
-        '$0 - $99,999': { min: 0, max: 99999 },
-        '$100,000 - $249,999': { min: 100000, max: 249999 },
-        '$250,000+': { min: 250000, max: Infinity },
-      };
-      const range = priceRanges[activeFilters.price];
-      if (range) {
-        vehicles = vehicles.filter(v => v.price >= range.min && v.price <= range.max);
-      }
-    }
-    return vehicles;
-  }, [category, activeFilters]);
-  
-  const pageTitle = category ? category.replace(/-/g, ' ') : 'Our Collection';
-  const pageSubtitle = category ? `Browse our curated selection of ${category.toLowerCase().replace(/-/g, ' ')} vehicles.` : "Browse our curated selection of the world's finest automobiles.";
 
   return (
     <>
       <div className="inventory-page-container">
         <div className="inventory-header">
-          <h1>{pageTitle}</h1>
-          <p>{pageSubtitle}</p>
-          {category && <Link to="/inventory" className="back-to-categories">← Back to All Categories</Link>}
+          <h1>Our Collection</h1>
+          <p>Browse our curated selection of the world's finest automobiles.</p>
         </div>
         <div className="inventory-layout">
-          <FilterSidebar 
-            vehicles={modelData.filter(vehicle => vehicle.category.replace(/\s+/g, '-').toLowerCase() === category.toLowerCase())} 
-            activeFilters={activeFilters}
-            onFilterChange={handleFilterChange}
-          />
+          <FilterSidebar />
           <main className="results-area">
             <div className="results-header">
-              <h3>Showing {filteredVehicles.length} Vehicles</h3>
+              <h3>Showing {modelData.length} Vehicles</h3>
             </div>
             <div className="results-grid">
-              {filteredVehicles.length > 0 ? (
-                filteredVehicles.map(vehicle => (
-                  <VehicleCard 
-                    key={vehicle.id} 
-                    vehicle={vehicle} 
-                    onViewDetails={setSelectedVehicle} 
-                  />
-                ))
-              ) : (
-                <p className="no-data-message">No vehicles match the current filters.</p>
-              )}
+              {modelData.map(vehicle => (
+                <VehicleCard 
+                  key={vehicle.id} 
+                  vehicle={vehicle} 
+                  onViewDetails={setSelectedVehicle} 
+                />
+              ))}
             </div>
           </main>
         </div>

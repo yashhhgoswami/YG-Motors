@@ -1,7 +1,7 @@
 // src/VehicleDetailsModal.js
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; // --- IMPORT Link for navigation ---
 import './VehicleDetailsModal.css';
 
 function VehicleDetailsModal({ vehicle, onClose }) {
@@ -34,9 +34,9 @@ function VehicleDetailsModal({ vehicle, onClose }) {
                 <li><strong>Location:</strong> {vehicle.location}</li>
               </ul>
             </div>
+            {/* --- BUTTONS ARE NOW FUNCTIONAL LINKS --- */}
             <div className="modal-actions">
-              <Link to="/order" className="action-button primary">Order Now</Link>
-              <Link to="/book-test-drive" className="action-button secondary">Request a Test Drive</Link>
+              <Link to="/book-test-drive" className="action-button primary">Request a Test Drive</Link>
               <Link to="/loan-application" className="action-button secondary">Apply for Financing</Link>
             </div>
           </div>
