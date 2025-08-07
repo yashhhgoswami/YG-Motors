@@ -23,6 +23,7 @@ import './TestDrivePage.css';
 import './ApplicationStatusPage.css';
 import './CreateProfilePage.css';
 import './VehicleDetailsModal.css';
+import './Footer.css';
 
 // Component Imports
 import Modal from './Modal';
@@ -38,10 +39,12 @@ import UserDashboard from './UserDashboard';
 import AdminDashboard from './AdminDashboard';
 import LoanApplicationsAdminPage from './LoanApplicationsAdminPage';
 import OrdersAdminPage from './OrdersAdminPage';
-import TradeInAdminPage from './TradeInAdminPage';
+import TradeInAdminPage from './TradeInPage';
 import TestDrivePage from './TestDrivePage';
 import ApplicationStatusPage from './ApplicationStatusPage';
 import CreateProfilePage from './CreateProfilePage';
+import Footer from './Footer';
+import MessagesAdminPage from './MessagesAdminPage'; // <-- NEW: Imported MessagesAdminPage
 
 // Asset Imports
 import logo from './assets/Vector.png';
@@ -67,6 +70,7 @@ function Navbar({ isScrolled, user, isAdmin }) {
       <ul className="navbar-links navbar-links-right">
         {isAdmin ? (
           <>
+            <li><Link to="/admin/messages">Messages</Link></li> {/* <-- NEW: Link to Messages Page */}
             <li><Link to="/admin/loan-applications">Loan Applications</Link></li>
             <li><Link to="/admin/orders">Orders</Link></li>
             <li><Link to="/admin/trade-in-requests">Trade-In Requests</Link></li>
@@ -120,10 +124,10 @@ function HeroSection() {
   return (
     <section className="hero-section">
       <video
-  className="main-car-video"
-  src="https://res.cloudinary.com/dpnndqqm4/video/upload/v1754243153/luruus_kjgpcs.mp4" // Paste your Cloudinary URL here
-  autoPlay loop muted playsInline
-/>
+        className="main-car-video"
+        src="https://res.cloudinary.com/dpnndqqm4/video/upload/v1754243153/luruus_kjgpcs.mp4"
+        autoPlay loop muted playsInline
+      />
       <div className="video-overlay"></div>
       <div className={`hero-text-container ${!isTextVisible ? 'hero-text--hidden' : ''}`}>
         <h1 className="hero-title-unleash">UNLEASH</h1>
@@ -180,12 +184,12 @@ function ContactUsSection() {
                 <div className="contact-item"><h3>Email Us</h3><p>Send us an email for detailed inquiries:</p><p><a href="mailto:info@ygmotors.net">info@ygmotors.net</a></p><p><a href="mailto:support@ygmotors.net">support@ygmotors.net</a></p></div>
                 <div className="contact-item"><h3>Business Hours</h3><p>Monday - Friday: 9:00 AM - 7:00 PM</p><p>Saturday: 10:00 AM - 5:00 PM</p><p>Sunday: Closed</p></div>
             </div>
-            <div className="developer-info">
+            {/* <div className="developer-info">
                 <h3>Website Developed by: Yash Goswami</h3>
                 <p><a href="mailto:yash.goswami.dev@gmail.com" target="_blank" rel="noopener noreferrer">Email: yash.goswami.dev@gmail.com</a></p>
                 <p><a href="https://www.linkedin.com/in/yashgoswami" target="_blank" rel="noopener noreferrer">LinkedIn: linkedin.com/in/yashgoswami</a></p>
                 <p><a href="https://github.com/yashgoswami" target="_blank" rel="noopener noreferrer">GitHub: github.com/yashgoswami</a></p>
-            </div>
+            </div> */}
         </section>
     );
 }
@@ -277,12 +281,17 @@ function App() {
               <Route path="/profile" element={<UserDashboard user={user} />} />
               <Route path="/my-applications" element={<ApplicationStatusPage />} />
               <Route path="/create-profile" element={<CreateProfilePage />} />
+              <Route path="/book-test-drive" element={<TestDrivePage showModal={showModal}/>} />
+
+              {/* Admin Routes */}
               <Route path="/admin/dashboard" element={<AdminDashboard onLogout={handleLogout} />} />
               <Route path="/admin/loan-applications" element={<LoanApplicationsAdminPage />} />
               <Route path="/admin/orders" element={<OrdersAdminPage />} />
               <Route path="/admin/trade-in-requests" element={<TradeInAdminPage />} />
-              <Route path="/book-test-drive" element={<TestDrivePage showModal={showModal}/>} />
+              <Route path="/admin/messages" element={<MessagesAdminPage />} /> {/* <-- NEW: Route for Messages Page */}
+
             </Routes>
+            <Footer />
           </>
         )}
       </div>

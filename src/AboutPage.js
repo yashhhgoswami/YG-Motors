@@ -1,42 +1,56 @@
 // src/AboutPage.js
 
 import React from 'react';
-import './AboutPage.css'; // We will create this CSS file next
+import './AboutPage.css';
 
 function AboutPage() {
   return (
     <div className="about-page-container">
-      <div className="about-page-hero">
-        <div className="about-hero-overlay"></div>
-        <div className="about-hero-content">
-          <h1>Our Legacy, Your Future</h1>
-          <p>Discover the philosophy that drives YG MOTORS.</p>
+      <div className="about-hero-section">
+        <div className="about-hero-text-content">
+          <h1>More Than a Machine.</h1>
+          <p>Discover the philosophy that drives every aspect of YG MOTORS.</p>
+        </div>
+        
+        {/* --- TEXT LOGO RESTRUCTURED --- */}
+        <div className="about-hero-logo-text">
+          <span className="logo-yg">YG</span>
+          <span className="logo-motors">MOTORS</span>
         </div>
       </div>
 
-      <div className="about-page-main-content">
-        <div className="about-mission">
-          <h2>The Pursuit of Perfection</h2>
+      <div className="about-content-wrapper">
+        <div className="about-section">
+          <h2>Our Mission</h2>
           <p>
-            Founded on a passion for precision engineering and unparalleled luxury, YG MOTORS is not merely a dealership; it is a destination for connoisseurs of the world's finest automobiles. We curate an exclusive collection of vehicles that represent the pinnacle of performance, design, and technological innovation.
-          </p>
-          <p>
-            Our mission is to provide a seamless and bespoke client experience that begins with the first inquiry and extends far beyond the moment you take the wheel. We believe in a standard of excellence that reflects the masterpieces we represent.
+            To redefine the automotive experience by curating a collection of the world's most significant vehicles and providing a level of service as exceptional as the machines we represent. At YG MOTORS, we don't just sell cars; we facilitate the acquisition of automotive art and deliver unparalleled driving experiences.
           </p>
         </div>
 
-        <div className="about-values">
-          <div className="value-card">
-            <h3>Curated Selection</h3>
-            <p>Every vehicle is hand-selected and rigorously inspected by our experts to ensure it meets the highest standards of quality and provenance.</p>
+        <div className="about-section philosophy-section">
+          <h2>Our Philosophy</h2>
+          <div className="philosophy-grid">
+            <div className="philosophy-card">
+              <h3>Precision</h3>
+              <p>Every vehicle in our collection is meticulously selected and inspected for its provenance, condition, and performance, ensuring it meets the most exacting standards.</p>
+            </div>
+            <div className="philosophy-card">
+              <h3>Performance</h3>
+              <p>We are driven by a passion for power and engineering excellence. We represent the pinnacle of automotive innovation and the sheer thrill of an unfiltered driving experience.</p>
+            </div>
+            <div className="philosophy-card">
+              <h3>Prestige</h3>
+              <p>Our commitment is to provide a seamless, discreet, and bespoke client journey, built on a foundation of trust and a shared appreciation for the extraordinary.</p>
+            </div>
           </div>
-          <div className="value-card">
-            <h3>Unmatched Service</h3>
-            <p>Our dedicated team of professionals is committed to providing personalized, discreet, and attentive service to every client.</p>
-          </div>
-          <div className="value-card">
-            <h3>Global Network</h3>
-            <p>Leveraging our extensive global network, we can source the most sought-after and rare automobiles for our discerning clientele.</p>
+        </div>
+
+        <div className="about-section founder-section">
+          <div className="founder-quote">
+            <blockquote>
+              "We started YG MOTORS not just to sell cars, but to share a passion. Each vehicle has a story, a soul. Our role is to be the trusted curator for the next chapter of that story."
+            </blockquote>
+            <cite>— Yash Goswami, Founder, YG MOTORS</cite>
           </div>
         </div>
       </div>

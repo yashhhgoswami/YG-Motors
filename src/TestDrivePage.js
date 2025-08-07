@@ -2,10 +2,10 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { modelData } from './carData'; // Using our existing vehicle data
+import { modelData } from './carData';
 import { collection, addDoc } from "firebase/firestore";
-import { db } from './firebaseConfig';
-import './TestDrivePage.css'; // We will create this next
+import { db, auth } from './firebaseConfig';
+import './TestDrivePage.css';
 
 const TestDriveProgressBar = ({ currentStep }) => {
   const steps = ['Vehicle', 'Schedule', 'Details', 'Confirm'];
@@ -24,7 +24,7 @@ const TestDriveProgressBar = ({ currentStep }) => {
   );
 };
 
-function TestDrivePage() {
+function TestDrivePage({ showModal }) {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -53,13 +53,35 @@ function TestDrivePage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const user = auth.currentUser;
+    if (!user) {
+      showModal({
+        isOpen: true,
+        type: 'auth',
+        title: "Authentication Required",
+        message: "You must be logged in to book a test drive.",
+        buttonText: "Go to Login",
+        onConfirm: () => navigate('/login')
+      });
+      return;
+    }
+
     try {
       await addDoc(collection(db, "testDriveBookings"), {
         ...formData,
-        submittedAt: new Date()
+        submittedAt: new Date(),
+        status: 'Pending', // Add default status
+        userId: user.uid, // Tag with user's ID
+        userEmail: user.email
       });
-      alert(`Your test drive for the ${formData.vehicle.name} has been requested. We will contact you shortly to confirm.`);
-      navigate('/');
+      showModal({
+        isOpen: true,
+        type: 'success',
+        title: "Request Submitted",
+        message: "Your test drive request has been received. A concierge will contact you shortly to confirm.",
+        buttonText: "Okay",
+        onConfirm: () => navigate('/')
+      });
     } catch (error) {
       console.error("Error submitting test drive request: ", error);
       alert('There was an error submitting your request. Please try again.');
@@ -70,8 +92,7 @@ function TestDrivePage() {
   const isStep2Valid = formData.date && formData.time;
   const isStep3Valid = formData.fullName && formData.email && formData.phone;
 
-  // Dummy data for available dates and times
-  const availableDates = ["July 28", "July 29", "July 30", "July 31"];
+  const availableDates = ["August 8", "August 9", "August 10", "August 11"];
   const availableTimes = ["10:00 AM", "11:30 AM", "02:00 PM", "03:30 PM"];
 
   return (
