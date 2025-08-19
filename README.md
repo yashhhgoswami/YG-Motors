@@ -1,70 +1,211 @@
-# Getting Started with Create React App
+<div align="center">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 🚗 YG MOTORS – Premium Automotive Experience Frontend
 
-## Available Scripts
+"Precision | Performance | Prestige"
 
-In the project directory, you can run:
+Modern React application delivering a luxury automotive dealership experience: curated inventory, loan applications, trade‑in processing, test drive bookings, client dashboards, and admin operations – all powered by Firebase.
 
-### `npm start`
+</div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## ✨ Features
 
-### `npm test`
+- Hero landing with cinematic video & animated inventory preview
+- Dynamic vehicle inventory showcase
+- Secure client authentication (Firebase Auth)
+- Loan application workflow with progressive multi‑step form
+- Trade‑In valuation form with user authentication gating
+- Test drive booking (client + admin management)
+- Centralized success / auth modals & notifications
+- User dashboard (applications, orders, trade‑ins, status)
+- Admin dashboard (loan apps, orders, trade‑ins, test drives, messages)
+- Firestore persistence for all submissions
+- Responsive, dark premium design language
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🧱 Tech Stack
 
-### `npm run build`
+| Layer | Technology |
+|-------|-----------|
+| UI | React 19, React Router 7 |
+| Styling | Modular CSS (per page/component) |
+| State/Auth | Firebase Auth |
+| Data | Firebase Firestore |
+| Tooling | Create React App (React Scripts) |
+| Testing | React Testing Library, Jest DOM |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🗂️ Proposed Project Structure (Refactor Plan)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+We will reorganize for clarity, scalability, and separation of concerns. Current flat `src/` will be refactored into:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+src/
+	App.js
+	index.js
+	styles/                # Global / shared base styles
+		App.css
+		index.css
+	config/                # Firebase & runtime config
+		firebaseConfig.js
+	data/
+		carData.js
+	assets/
+		images/              # (moved from assets/*)
+		video/
+		fonts/
+	components/
+		layout/
+			Navbar.jsx
+			Footer.jsx
+		ui/
+			Modal/
+				Modal.jsx
+				Modal.css
+			Notification/
+				Notification.jsx
+				Notification.css
+			VehicleDetailsModal/
+				VehicleDetailsModal.jsx
+				VehicleDetailsModal.css
+	pages/
+		About/
+			AboutPage.jsx
+			AboutPage.css
+		Contact/
+			ContactPage.jsx
+			ContactPage.css
+		Inventory/
+			InventoryPage.jsx
+			InventoryPage.css
+		LoanApplication/
+			LoanApplicationPage.jsx
+			LoanApplicationPage.css
+		TradeIn/
+			TradeInPage.jsx
+			TradeInPage.css
+		TestDrive/
+			TestDrivePage.jsx
+			TestDrivePage.css
+		Order/
+			OrderPage.jsx
+			OrderPage.css
+		Auth/
+			LoginPage.jsx
+			LoginPage.css
+			SignUpPage.jsx
+			SignUpPage.css
+		Profile/
+			UserDashboard.jsx
+			UserDashboard.css
+			CreateProfilePage.jsx
+			CreateProfilePage.css
+			ApplicationStatusPage.jsx
+			ApplicationStatusPage.css
+		Admin/
+			AdminDashboard.jsx
+			LoanApplicationsAdminPage.jsx
+			OrdersAdminPage.jsx
+			TradeInAdminPage.jsx
+			MessagesAdminPage.jsx
+			# each with its own CSS if needed
+```
 
-### `npm run eject`
+After confirmation, imports in `App.js` will be updated and redundant top‑level CSS imports removed (pages already scope their own styles). Fonts will be colocated under `assets/fonts` and loaded via `@font-face` in a global stylesheet.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🔧 Environment Setup
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Clone repository
+2. Install dependencies:
+	 ```bash
+	 npm install
+	 ```
+3. Create a Firebase project and enable:
+	 - Authentication (Email/Password)
+	 - Firestore Database
+4. Create `.env.local` (already git‑ignored) with:
+	 ```bash
+	 REACT_APP_FIREBASE_API_KEY=YOUR_KEY
+	 REACT_APP_FIREBASE_AUTH_DOMAIN=...
+	 REACT_APP_FIREBASE_PROJECT_ID=...
+	 REACT_APP_FIREBASE_STORAGE_BUCKET=...
+	 REACT_APP_FIREBASE_MESSAGING_SENDER_ID=...
+	 REACT_APP_FIREBASE_APP_ID=...
+	 ```
+5. Start development server:
+	 ```bash
+	 npm start
+	 ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🧪 Testing
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Run test watcher:
+```bash
+npm test
+```
+Add component tests under `src/__tests__/` or colocated with `.test.js` suffix. Example targets: form validation, modal rendering, route guards.
 
-## Learn More
+## 🚀 Build & Deploy
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Create production build:
+```bash
+npm run build
+```
+Deploy options:
+- Static hosting (Firebase Hosting, Netlify, Vercel)
+- Behind CDN for asset optimization
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🛡️ Security & Privacy
 
-### Code Splitting
+- Client-side only; do not store secrets in repo.
+- Firestore security rules should restrict access per `userId` for user-owned documents and limit admin collections to privileged accounts.
+- Sanitize and validate all user inputs before writing to Firestore (server rules + client constraints).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🗺️ Roadmap Ideas
 
-### Analyzing the Bundle Size
+- Global design tokens (colors, spacing, typography) via CSS variables
+- Dark/light theme toggle
+- Pagination / filtering for inventory
+- Image optimization & lazy loading
+- Form field masking (SSN, phone) & stronger validation
+- Role-based route guards abstraction
+- Automated visual regression snapshots
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🤝 Contributing
 
-### Making a Progressive Web App
+1. Fork & branch: `feat/your-feature`
+2. Keep PRs small & focused
+3. Add/maintain tests where logic changes
+4. Follow existing code style (ESLint config)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 📸 Screenshots (Add Later)
 
-### Advanced Configuration
+| Landing | Dashboard | Admin |
+|---------|----------|-------|
+| (hero)  | (user)   | (admin) |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 📄 License
 
-### Deployment
+Consider adding an OSS license (e.g. MIT) if you intend public reuse.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 🙌 Acknowledgements
 
-### `npm run build` fails to minify
+- Firebase for backend services
+- React community & open‑source ecosystem
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+### ✅ Next Refactor Step (Action Required)
+Please confirm that you would like me to proceed with physically moving files into the proposed structure. This will involve updating many import paths. Once you approve, I will:
+
+1. Create the directories
+2. Move each page & component
+3. Update all imports in `App.js` and any cross‑component references
+4. Introduce a `styles/fonts.css` (if fonts are used) and consolidate font loading
+5. Run a quick build to verify everything compiles
+
+Let me know: proceed with the restructuring? (Yes/No)
+
+---
+
+Made with passion for performance. 🏁
